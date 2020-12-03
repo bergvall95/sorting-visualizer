@@ -1,0 +1,8 @@
+<div class="body-container">
+    <div @fade *ngFor="let bar of this.dataService.array" [style.height]="bar.value + 'px'"
+        [style.background-color]='bar.color' class="array-bar">
+    </div>
+</div>
+<div class="sort-button">
+    <div (click)="sort()" class="btn btn-primary">Sort me!</div>
+</div>
