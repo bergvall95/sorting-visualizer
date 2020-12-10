@@ -2,3 +2,20 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+@import "src/app/colors.scss";
+.nav-container{
+    background-color: $base-dark;
+}
+
+body{
+    background-color: $base-color;
+}
+
+.nav-item{
+    background-color: $base-mid;
+}
+
+
+.nav-tabs .nav-link.active{
+    background-color: $accent-light;
+}

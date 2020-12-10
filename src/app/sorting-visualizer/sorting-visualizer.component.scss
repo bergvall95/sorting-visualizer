@@ -1,18 +1,30 @@
+@import "../colors.scss";
 .array-bar{
-    width: 6px;   
-
-    margin: 0px 2px;
+    display: flex;
+    width: 5px;   
+    top: 0;
 }
 
 .body-container{
+    position: relative;
     display: flex;
     justify-content: center;
-    align-items: baseline;
+    align-items: flex-end;
+    bottom:0;
+    height: 510px;
 }
 
-.sort-button{
+.sort-button-container{
     display: flex;
     justify-content: center;
-    align-items: center;
     margin: 20px 20px;
+}
+.sort-button{
+    color:white;
+    margin: 2px 5px;
+    background-color:$accent-warm ;
+}
+
+.body-container-container{
+    height: 520px;   
 }

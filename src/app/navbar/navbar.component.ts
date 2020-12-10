@@ -16,8 +16,8 @@ import {
   animations: [
     trigger('fade', [
       transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(-15px)' }),
-        animate('700ms ease-out')
+        style({ opacity: 0, transform: 'translateY(-50px)' }),
+        animate('1700ms ease-out')
       ])
     ])
   ]

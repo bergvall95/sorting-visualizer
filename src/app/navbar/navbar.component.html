@@ -1,23 +1,16 @@
-<div class="nav-container">
-
-    <ul @fade ngbNav #nav="ngbNav" [activeId]="1" class="nav-tabs justify-content-center">
+<div @fade class="nav-container">
+    <ul @fade ngbNav #nav="ngbNav" [activeId]="1" class="nav-tabs justify-content-center nav-container">
         <li class="nav-item" (click)="this.dataService.setAlgo(1)" [ngbNavItem]="1">
-            <a ngbNavLink>Merge Sort</a>
+            <a ngbNavLink class="nav-link">Merge Sort</a>
         </li>
         <li class="nav-item" (click)="this.dataService.setAlgo(2)" [ngbNavItem]="2">
-            <a ngbNavLink>Quick Sort</a>
+            <a ngbNavLink class="nav-link">Quick Sort</a>
         </li>
         <li class="nav-item" (click)="this.dataService.setAlgo(3)" [ngbNavItem]="3">
-            <a ngbNavLink>Selection Sort</a>
+            <a ngbNavLink>Radix Sort</a>
         </li>
         <li class="nav-item" (click)="this.dataService.setAlgo(4)" [ngbNavItem]="4">
             <a ngbNavLink>Insertion Sort</a>
         </li>
-        <div (click)='resetArray()' class="btn btn-primary nav-item"> Reset Array</div>
-        <div class="btn btn-secondary nav-item">
-            <a style="color:white" href="https://www.linkedin.com/in/alex-bergvall/">
-                <b>Alex Bergvall</b>
-            </a>
-        </div>
     </ul>
 </div>

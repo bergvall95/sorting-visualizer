@@ -1,8 +1,12 @@
-<div class="body-container">
-    <div @fade *ngFor="let bar of this.dataService.array" [style.height]="bar.value + 'px'"
-        [style.background-color]='bar.color' class="array-bar">
+<div class='body-container-container'>
+    <div class="body-container" *ngIf="this.dataService.array.length > 0 && 200 > this.dataService.array.length ">
+        <div @fade *ngFor="let bar of this.dataService.array" [style.height]="bar.value + 'px'"
+            [style.background-color]='bar.color' class="array-bar">
+        </div>
     </div>
+
 </div>
-<div class="sort-button">
-    <div (click)="sort()" class="btn btn-primary">Sort me!</div>
+<div @fade class="sort-button-container" *ngIf="this.dataService.array">
+    <div (click)="sort()" class="btn sort-button">Sort</div>
+    <div (click)='resetArray()' class="btn sort-button"> Reset Array</div>
 </div>

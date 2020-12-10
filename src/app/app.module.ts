@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule, NgbNav } from '@ng-bootstrap/ng-bootstrap';
 import { SortingVisualizerComponent } from './sorting-visualizer/sorting-visualizer.component';
+import { ExplanationContentComponent } from './explanation-content/explanation-content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    SortingVisualizerComponent
+    SortingVisualizerComponent,
+    ExplanationContentComponent
   ],
   imports: [
     BrowserModule,

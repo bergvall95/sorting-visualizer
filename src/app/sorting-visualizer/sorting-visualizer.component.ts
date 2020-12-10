@@ -1,7 +1,6 @@
 import { ArrayBar } from './../interfaces';
 import { DataService } from './../data.service';
 import { Component, OnInit } from '@angular/core';
-import * as algorithms from './sorting-algorithms';
 import { Observable } from 'rxjs';
 import {
   trigger,
@@ -39,7 +38,9 @@ export class SortingVisualizerComponent implements OnInit {
   renderArray() {
     this.array = this.dataService.array;
   }
-
+  resetArray() {
+    this.dataService.resetArray();
+  }
 
   sort() {
     switch (this.dataService.getAlgo()) {
@@ -48,11 +49,11 @@ export class SortingVisualizerComponent implements OnInit {
         break;
       }
       case 2: {
-        this.quickSort(this.array);
+        this.dataService.quickSort(0, this.dataService.array.length - 1);
         break;
       }
       case 3: {
-        this.selectionSort(this.array);
+        this.dataService.radixSort();
         break;
       }
       case 4: {

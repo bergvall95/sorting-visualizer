@@ -1,7 +1,27 @@
+@import "../colors.scss";
+
 .nav-container{
-    margin: 20px 0;
+    padding-top: 15px;
 }
 
 .nav-item{
-    margin: 2px 5px;
+    margin: 0px 5px;
+    border-radius: 5px 5px 0 0;
+    color: $base-color;
+}
+.nav-link{
+    color: white;
+}
+ul {
+    margin-bottom: 0px;
+    border:none;
+}
+.reset-button{
+    display: block;
+    border-radius: 5px 5px 0 0;
+    text-align: center;
+    color: white;
+    background-color: $base-mid;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
 }
