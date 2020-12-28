@@ -28,3 +28,11 @@
 .body-container-container{
     height: 520px;   
 }
+@media (min-width: 241px) and (max-width: 319px) {
+    /* a little bit bigger screens */
+    .array-bar{width:2px}
+ }
+ @media (min-width: 320px) and (max-width: 767px) {
+    /* Basically up to, but not including an iPad */
+    .array-bar{width:3px}
+ }

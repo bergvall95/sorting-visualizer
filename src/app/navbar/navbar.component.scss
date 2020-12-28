@@ -11,10 +11,14 @@
 }
 .nav-link{
     color: white;
+    font-size: 1em;
 }
 ul {
     margin-bottom: 0px;
     border:none;
+}
+.nav-item{
+    background-color: $base-mid;
 }
 .reset-button{
     display: block;
@@ -25,3 +29,22 @@ ul {
     padding: 0.5rem 1rem;
     cursor: pointer;
 }
+@media (max-width: 240px) {
+   
+ }
+ @media (min-width: 241px) and (max-width: 319px) {
+    /* a little bit bigger screens */
+    .nav-item{
+        font-size: .6em;
+    }
+ }
+ @media (min-width: 320px) and (max-width: 767px) {
+    /* Basically up to, but not including an iPad */
+    .nav-item{
+        font-size: .6em;
+        background-color: $base-mid;
+    }
+ }
+ @media (min-width: 768px) {
+
+ }

@@ -9,8 +9,11 @@
     </div>
     <div *ngIf="this.dataService.algo == 2">
         <div>Time Complexity:
-            Average Case: O(n*log(n))
-            Worst Case: O(n^2)
+            <div>
+                Average Case: O(n*log(n))
+                Worst Case: O(n^2)
+            </div>
+
         </div>
         <div>
             Space Complexity: O(log(n))
@@ -18,10 +21,14 @@
     </div>
 
     <div *ngIf="this.dataService.algo == 3">
-        <div>Time Complexity:
-            O((n+b) * log(k))
-            Where b is the base (10), and k is the maximum possible value in the array.
-        </div>
+        <span>
+            <div>Time Complexity: O((n+b) * log_b(k))
+                <div>
+
+                    Where b is the base (10), and k is the maximum possible value in the array.
+                </div>
+            </div>
+        </span>
         <div>
             Space Complexity: O(n+k)
         </div>
