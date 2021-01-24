@@ -29,6 +29,7 @@ export class SortingVisualizerComponent implements OnInit {
   Red = '#b95252';
   Green = '#62bb57';
   Blue = '#3c79ac';
+  isSorting = false;
   constructor(public dataService: DataService) {
   }
 
@@ -39,41 +40,35 @@ export class SortingVisualizerComponent implements OnInit {
     this.array = this.dataService.array;
   }
   resetArray() {
+    this.isSorting = false;
     this.dataService.resetArray();
   }
 
-  sort() {
+  async sort() {
+    this.isSorting = true;
     switch (this.dataService.getAlgo()) {
       case 1: {
-        this.dataService.mergeSort();
+        await this.dataService.mergeSort();
         break;
       }
       case 2: {
-        this.dataService.quickSort(0, this.dataService.array.length - 1);
+        await this.dataService.quickSortHelper();
         break;
       }
       case 3: {
-        this.dataService.radixSort();
+        await this.dataService.radixSort();
         break;
       }
       case 4: {
-        this.dataService.insertionSort();
+        await this.dataService.insertionSort();
         break;
       }
       default: {
-        this.dataService.mergeSort();
+        await this.dataService.mergeSort();
       }
     }
+    this.isSorting = false;
 
   }
-
-
-  quickSort(array: ArrayBar[]) {
-
-  }
-  selectionSort(array: ArrayBar[]) {
-
-  }
-
 
 }

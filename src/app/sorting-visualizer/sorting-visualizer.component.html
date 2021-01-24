@@ -7,6 +7,6 @@
 
 </div>
 <div @fade class="sort-button-container" *ngIf="this.dataService.array">
-    <div (click)="sort()" class="btn sort-button">Sort</div>
+    <button (click)="sort()" class="btn sort-button" [disabled]='this.isSorting'> Sort</button>
     <div (click)='resetArray()' class="btn sort-button"> Reset Array</div>
 </div>

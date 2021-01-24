@@ -13,25 +13,45 @@ export class DataService {
   Blue = '#374785';
   isDone = true;
   reset = false;
+  audioCtx: AudioContext;
+  oscillator: OscillatorNode;
+
+
   constructor() {
     this.resetArray();
     this.algo = 1;
+
+  }
+
+  initializeOscillator(osc: OscillatorNode) {
+    this.audioCtx = new AudioContext();
+    var gainNode = this.audioCtx.createGain();
+    this.oscillator = this.audioCtx.createOscillator();
+    this.oscillator.type = 'sine';
+    this.oscillator.frequency.setValueAtTime(440, this.audioCtx.currentTime);
+    gainNode.connect(this.audioCtx.destination);
+    this.oscillator.connect(gainNode);
+    gainNode.gain.value = 0.05;
   }
 
   async resetArray(): Promise<void> {
     this.reset = true; // making algorithms stop if array is reset
     this.array = [];
+    if (this.oscillator) {
+      this.oscillator.stop();
+    }
     await sleep(150);
     this.reset = false;
-    this.isDone = true;
+
     this.array = [];
     for (let i = 0; i < 150; i++) {
       const temp: ArrayBar = {
-        value: (Math.floor(Math.random() * (500 - 4) + 5)),
+        value: i * 3,
         color: this.Blue
       };
       this.array.push(temp);
     }
+    this.shuffle(this.array);
   }
 
   setArray(array): void {
@@ -46,12 +66,14 @@ export class DataService {
   }
 
   setAlgo(algo: number): void {
-
     this.algo = algo;
     this.resetArray();
   }
 
   async changeBarColor(array: ArrayBar[], index: number, color: string): Promise<void> {
+
+    var tone = 200 + array[index].value * 2;
+    this.oscillator.frequency.setValueAtTime(tone, this.audioCtx.currentTime);
     if (this.reset) {
       return;
     }
@@ -71,18 +93,30 @@ export class DataService {
     await sleep(1);
   }
 
+  shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
 
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
   // MERGE SORT /////////////////////////////////////////////////////////////////
-  mergeSort(): void {
-    if (this.isDone) {
-      this.isDone = false;
-      this.mergeSortHelper(0, this.array.length - 1);
-
-    }
-    else {
-      return;
-    }
-    this.isDone = true;
+  async mergeSort() {
+    this.initializeOscillator(this.oscillator);
+    this.oscillator.start();
+    await this.mergeSortHelper(0, this.array.length - 1);
+    this.oscillator.stop();
   }
 
   async mergeSortHelper(l, r): Promise<void> {
@@ -145,9 +179,19 @@ export class DataService {
     }
   }
   // QUICKSORT /////////////////////////////////////////////////////////////////
-  quickSortHelper() {
-    this.quickSort(0, this.array.length - 1)
+  async quickSortHelper() {
+    this.initializeOscillator(this.oscillator);
+    this.oscillator.start();
+    await this.quickSort(0, this.array.length - 1);
+    for (var i = 0; i < this.array.length; i++) {
+      await sleep(5);
+      this.changeBarColor(this.array, i, this.Red);
+      await sleep(7);
+      this.changeBarColor(this.array, i, this.Blue);
+    }
+    this.oscillator.stop();
   }
+
   async quickSort(low, high): Promise<void> {
     if (low < high) {
       const pi = await this.partition(low, high);
@@ -157,6 +201,7 @@ export class DataService {
     for (let i = low; i <= high; i++) {
       this.changeBarColor(this.array, i, this.Blue);
     }
+
   }
 
   async partition(low, high): Promise<number> {
@@ -181,6 +226,8 @@ export class DataService {
 
   // RADIX SORT/////////////////////////////////////////////////////////////
   async radixSort(): Promise<void> {
+    this.initializeOscillator(this.oscillator);
+    this.oscillator.start();
     let max = 0
     for (let i = 0; i < this.array.length; i++) {
       if (this.array[i].value > max) {
@@ -193,6 +240,8 @@ export class DataService {
         return;
       }
     }
+    this.oscillator.stop();
+
   }
 
   async countSort(array, exp): Promise<void> {
@@ -202,6 +251,9 @@ export class DataService {
 
     for (let i = 0; i < n; ++i) {
       this.changeBarColor(this.array, i, this.Red);
+      if (this.reset) {
+        return;
+      }
       await sleep(7);
       count[Math.floor(array[i].value / exp) % 10]++;
     }
@@ -229,10 +281,9 @@ export class DataService {
   // INSERTION SORT/////////////////////////////////////////////////////////////
 
   async insertionSort(): Promise<void> {
-    if (!this.isDone) {
-      return;
-    }
-    this.isDone = false;
+    this.initializeOscillator(this.oscillator);
+    this.oscillator.start();
+
     let i = 1;
     while (i < this.array.length) {
       let j = i;
@@ -254,7 +305,8 @@ export class DataService {
       await sleep(3);
       this.changeBarColor(this.array, i, this.Blue);
     }
-    this.isDone = true;
+
+    this.oscillator.stop();
   }
 }
 
